@@ -1,0 +1,19 @@
+# ETAPA 1: Compilación (Aquí Docker pone el Maven que a ti te falta)
+FROM maven:3.9.6-eclipse-temurin-17 AS build
+WORKDIR /app
+
+# Copiamos el pom.xml y descargamos dependencias
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+# Copiamos el código fuente y compilamos
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# ETAPA 2: Ejecución (Imagen ligera final)
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
