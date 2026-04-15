@@ -4,7 +4,7 @@ services:
   # Configuración para la primera web (Puerto 4000)
   web01:
     image: nginx:alpine
-    container_name: servidor-bruno-4000
+    container_name: servidor-fabiano-4000
     ports:
       - "4000:80"
     volumes:
@@ -13,8 +13,14 @@ services:
   # Configuración para la segunda web (Puerto 4001)
   web02:
     image: nginx:alpine
-    container_name: servidor-bruno-4001
+    container_name: servidor-fabiano-4001
     ports:
       - "4001:80"
     volumes:
       - ./src/web02:/usr/share/nginx/html
+
+  api: 
+    image: mi-backend-java
+    container_name: api-fabiano
+    ports:
+      - "8080:8080"
