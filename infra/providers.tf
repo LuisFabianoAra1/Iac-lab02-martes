@@ -2,11 +2,11 @@ terraform {
   required_providers {
     docker = {
       source  = "kreuzwerker/docker"
-      version = "~> 3.0.1"
+      version = "4.2.0"
     }
   }
 }
 
 provider "docker" {
-  host = "npipe:////./pipe/docker_engine" # Si usas Windows/Docker Desktop
+  # Configuration options
 }
